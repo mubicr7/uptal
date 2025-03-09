@@ -1,0 +1,29 @@
+<div class="board">
+  <div class="column" *ngFor="let list of lists; let i = index">
+    <div class="header">
+      <h3>{{ list.name }}</h3>
+      <button class="add-applicants" *ngIf="i === 0">+ Add Applicants</button>
+    </div>
+    <p>{{ list.candidates.length }} <strong>Total</strong></p>
+    <div
+      cdkDropList
+      [id]="'list-' + i"
+      [cdkDropListData]="list.candidates"
+      [cdkDropListConnectedTo]="connectedLists"
+      class="drop-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div
+        class="candidate-card"
+        *ngFor="let candidate of list.candidates"
+        cdkDrag
+      >
+        <p>
+          <strong>{{ candidate.name }}</strong>
+        </p>
+        <p>{{ candidate.city }}</p>
+        <p>{{ candidate.phone }}</p>
+      </div>
+    </div>
+  </div>
+</div>
